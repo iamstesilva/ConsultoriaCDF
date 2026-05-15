@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TCC FutureTech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#050505;
+    color:white;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:'';
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.06), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255,255,255,0.03), transparent 30%);
+    z-index:-2;
+}
+
+.grid-bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size:40px 40px;
+    z-index:-1;
+    opacity:0.2;
+}
+
+header{
+    width:100%;
+    padding:25px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:fixed;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(12px);
+    background:rgba(0,0,0,0.45);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+    font-size:60px;
+    font-weight:700;
+    letter-spacing:3px;
+}
+
+.logo span{
+    color:#b8b8b8;
+}
+
+nav{
+    display:flex;
+    gap:35px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    font-size:14px;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#b8b8b8;
+}
+
+.btn{
+    padding:14px 28px;
+    border:1px solid rgba(255,255,255,0.25);
+    color:white;
+    text-decoration:none;
+    transition:0.4s;
+    font-size:14px;
+    letter-spacing:1px;
+}
+
+.btn:hover{
+    background:#b8b8b8;
+    color:black;
+    border-color:#b8b8b8;
+    box-shadow:0 0 25px #b8b8b8;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 8%;
+    position:relative;
+}
+
+.hero-text{
+    max-width:650px;
+}
+
+.hero-text h1{
+    font-size:78px;
+    line-height:1;
+    margin-bottom:25px;
+    font-weight:700;
+}
+
+.hero-text h1 span{
+    color:#b8b8b8;
+}
+
+.hero-text p{
+    color:#cfcfcf;
+    font-size:18px;
+    line-height:1.8;
+    margin-bottom:40px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.secondary-btn{
+    background:transparent;
+}
+
+.glow-circle{
+    position:absolute;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    background:#b8b8b8;
+    filter:blur(180px);
+    opacity:0.12;
+    right:-120px;
+}
+
+.hero-logo-box{
+    width:600px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-logo{
+    width:100%;
+    max-width:520px;
+    object-fit:contain;
+
+    filter:
+    drop-shadow(0 0 40px rgba(255,255,255,0.18))
+    brightness(1.1);
+}
+
+.section{
+    padding:120px 8%;
+}
+
+.section-title{
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.section-subtitle{
+    color:#bcbcbc;
+    margin-bottom:70px;
+    line-height:1.8;
+    max-width:700px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    padding:40px 30px;
+    border-radius:25px;
+    transition:0.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.card::before{
+    content:'';
+    position:absolute;
+    width:120px;
+    height:120px;
+    background:#b8b8b8;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:0;
+    top:-20px;
+    right:-20px;
+    transition:0.5s;
+}
+
+.card:hover::before{
+    opacity:0.2;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#b8b8b8;
+}
+
+.icon{
+    width:65px;
+    height:65px;
+    border-radius:18px;
+    background:rgba(255,255,255,0.05);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    margin-bottom:25px;
+}
+
+.card h3{
+    margin-bottom:15px;
+    font-size:24px;
+}
+
+.card p{
+    color:#cfcfcf;
+    line-height:1.8;
+}
+
+.about{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:70px;
+    align-items:center;
+}
+
+.about-image{
+    height:500px;
+    border-radius:30px;
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.about-content h2{
+    font-size:52px;
+    margin-bottom:25px;
+}
+
+.about-content p{
+    color:#cfcfcf;
+    line-height:2;
+    margin-bottom:35px;
+}
+
+.stats{
+    display:flex;
+    gap:40px;
+    margin-top:40px;
+}
+
+.stat h3{
+    color:#b8b8b8;
+    font-size:42px;
+}
+
+.stat span{
+    color:#cfcfcf;
+}
+
+.contact{
+    text-align:center;
+    background:rgba(255,255,255,0.03);
+    border-top:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.contact h2{
+    font-size:56px;
+    margin-bottom:20px;
+}
+
+.contact p{
+    color:#cfcfcf;
+    margin-bottom:40px;
+    font-size:18px;
+}
+
+footer{
+    padding:35px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+footer p{
+    color:#8d8d8d;
+}
+
+.socials{
+    display:flex;
+    gap:15px;
+}
+
+.socials a{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.15);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.socials a:hover{
+    background:#b8b8b8;
+    color:black;
+    box-shadow:0 0 20px #b8b8b8;
+}
+
+@media(max-width:1100px){
+
+.hero{
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    gap:70px;
+    padding-top:140px;
+}
+
+.hero-buttons{
+    justify-content:center;
+}
+
+.about{
+    grid-template-columns:1fr;
+}
+
+nav{
+    display:none;
+}
+
+.hero-text h1{
+    font-size:58px;
+}
+
+.hero-card{
+    width:100%;
+    max-width:400px;
+}
+
+.contact h2{
+    font-size:42px;
+}
+}
+
+@media(max-width:700px){
+
+.hero-text h1{
+    font-size:42px;
+}
+
+.section-title,
+.about-content h2,
+.contact h2{
+    font-size:34px;
+}
+
+.stats{
+    flex-direction:column;
+}
+
+footer{
+    flex-direction:column;
+    text-align:center;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+
+<header>
+    <div class="logo">Consultoria<span>CDF</span></div>
+
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#projeto">Projeto</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <a href="#contato" class="btn">FALE CONOSCO</a>
+</header>
+
+<section class="hero" id="inicio">
+
+<div class="glow-circle"></div>
+
+<div class="hero-text">
+    <h1>Transformando <span>tecnologia</span> em inovação.</h1>
+
+    <p>
+        Um projeto futurista desenvolvido para o TCC com foco em inovação,
+        inteligência artificial, automação e soluções digitais modernas.
+    </p>
+
+    <div class="hero-buttons">
+        <a href="#sobre" class="btn">SAIBA MAIS</a>
+        <a href="#contato" class="btn secondary-btn">COMEÇAR</a>
+    </div>
+</div>
+
+<div class="hero-card">
+
+    <img src="LOGO.jpg" alt="Logo CDF" class="hero-logo">
+
+</div>
+
+</section>
+
+<section class="section" id="equipe">
+
+<h2 class="section-title">
+Nossa Equipe
+</h2>
+
+<p class="section-subtitle">
+Conheça as integrantes responsáveis pelo desenvolvimento estratégico, tecnológico e administrativo da startup.
+</p>
+
+<style>
+
+.hero-card{
+    width:420px;
+    height:420px;
+    border-radius:35px;
+    background:rgba(255,255,255,0.02);
+    border:1px solid rgba(255,255,255,0.06);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    overflow:hidden;
+    backdrop-filter:blur(20px);
+}
+
+.hero-card::before{
+    content:'';
+    position:absolute;
+    width:240px;
+    height:240px;
+    border:1px solid rgba(255,255,255,0.08);
+    transform:rotate(45deg);
+}
+
+.hero-logo{
+    width:75%;
+    object-fit:contain;
+    z-index:2;
+
+    filter:
+    brightness(1.2)
+    contrast(1.1)
+    drop-shadow(0 0 25px rgba(255,255,255,0.15));
+}
+
+.logo-img{
+    width:80%;
+    max-width:280px;
+    object-fit:contain;
+    filter:brightness(1.1);
+}
+
+.team-grid{
+    display:flex;
+    justify-content:center;
+    align-items:stretch;
+    gap:24px;
+    margin-top:40px;
+    flex-wrap:wrap;
+}
+
+.member-card{
+    width:320px;
+    min-width:320px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:28px;
+    overflow:hidden;
+    transition:0.4s;
+    backdrop-filter:blur(15px);
+}
+
+.member-card:hover{
+    transform:translateY(-10px);
+    border-color:#b8b8b8;
+    box-shadow:0 0 30px rgba(184,184,184,0.2);
+}
+
+.member-photo{
+    width:100%;
+    height:380px;
+    background:#111;
+    overflow:hidden;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.member-content{
+    padding:22px;
+}
+
+.member-content h3{
+    font: size 21px;
+    margin-bottom:10px;
+}
+
+.member-role{
+    color:#b8b8b8;
+    font-size:14px;
+    margin-bottom:20px;
+    font-weight:600;
+}
+
+.member-content p{
+    color:#cfcfcf;
+    line-height:1.8;
+    font-size:14px;
+}
+
+.member-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+</style>
+
+<div class="team-grid">
+
+<div class="member-card">
+<div class="member-photo">
+    <img src="NINA.jpg" alt="Aline Kipp">
+</div>
+<div class="member-content">
+<h3>Aline Kipp</h3>
+<div class="member-role">Diretora de Segurança do Trabalho e Expansão</div>
+<p>
+Responsável pela gestão das normas de segurança e prevenção de riscos dentro da startup, garantindo conformidade com as legislações vigentes. Atua no desenvolvimento de políticas de segurança, treinamentos internos, análise de riscos operacionais e promoção do bem-estar dos colaboradores.
+</p>
+</div>
+</div>
+
+<div class="member-card">
+<div class="member-photo">
+    <img src="GIGI.jpg" alt="Giovanna Augusto">
+</div>
+<div class="member-content">
+<h3>Giovanna Augusto</h3>
+<div class="member-role">Diretora de Marketing Digital, RH e Benefícios</div>
+<p>
+Responsável pela comunicação e posicionamento digital da startup, desenvolvendo ações de marketing voltadas ao fortalecimento da marca. Atua também na gestão de recursos humanos, recrutamento, integração de colaboradores e administração de benefícios.
+</p>
+</div>
+</div>
+
+<div class="member-card">
+<div class="member-photo">
+    <img src="MANU.png" alt="Emanuelle Ferreira">
+</div>
+<div class="member-content">
+<h3>Emanuelle Ferreira</h3>
+<div class="member-role">Diretora Executiva, Comercial e Gestão de Projetos</div>
+<p>
+Responsável pelo desenvolvimento comercial da startup, estratégias de vendas e relacionamento com clientes e parceiros. Coordena projetos garantindo organização, cumprimento de prazos e alinhamento entre equipes.
+</p>
+</div>
+</div>
+
+<div class="member-card">
+<div class="member-photo">
+    <img src="MARI.jpg" alt="Marina Peixoto">
+</div>
+<div class="member-content">
+<h3>Marina Peixoto</h3>
+<div class="member-role">Diretora Contábil e Jurídica</div>
+<p>
+Responsável pela administração contábil, suporte jurídico e conformidade legal da startup. Atua no acompanhamento de contratos, organização fiscal, controle patrimonial e análise documental.
+</p>
+</div>
+</div>
+
+<div class="member-card">
+<div class="member-photo">
+    <img src="STE.png" alt="Stephanie Silva">
+</div>
+<div class="member-content">
+<h3>Stephanie Silva</h3>
+<div class="member-role">Diretora Financeira, Planejamento Estratégico, Fiscal e Sistemas Tecnológicos</div>
+<p>
+Responsável pela gestão financeira e estratégica da startup, planejamento orçamentário, controle de custos e definição de metas organizacionais. Atua também na área fiscal e administração dos sistemas tecnológicos.
+</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="servicos">
+
+<h2 class="section-title">Soluções Inteligentes</h2>
+<p class="section-subtitle">
+Desenvolvemos projetos tecnológicos modernos com foco em escalabilidade,
+segurança e experiência digital.
+</p>
+
+<div class="cards">
+
+    <div class="card">
+        <div class="icon">⚡</div>
+        <h3>Automação</h3>
+        <p>
+            Automatização de processos empresariais para aumentar produtividade,
+            eficiência e reduzir custos operacionais.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">💻</div>
+        <h3>Desenvolvimento</h3>
+        <p>
+            Criação de sistemas modernos, sites responsivos e plataformas digitais
+            inovadoras.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">☁</div>
+        <h3>Cloud</h3>
+        <p>
+            Infraestrutura em nuvem com segurança, performance e alta disponibilidade.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="icon">🤖</div>
+        <h3>IA</h3>
+        <p>
+            Integração de inteligência artificial para análises, automações e inovação.
+        </p>
+    </div>
+
+</div>
+
+</section>
+
+<section class="section about" id="sobre">
+
+<div class="about-image"></div>
+
+<div class="about-content">
+    <h2>Conectando pessoas, dados e futuro.</h2>
+
+    <p>
+        Este projeto foi desenvolvido com o objetivo de demonstrar como a tecnologia
+        pode transformar empresas através de inovação digital, integração inteligente
+        e soluções modernas focadas na experiência do usuário.
+    </p>
+
+    <a href="#contato" class="btn">EXPLORAR PROJETO</a>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3>+98%</h3>
+            <span>Eficiência</span>
+        </div>
+
+        <div class="stat">
+            <h3>24h</h3>
+            <span>Conectividade</span>
+        </div>
+
+        <div class="stat">
+            <h3>100%</h3>
+            <span>Digital</span>
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+<section class="section" id="importancia">
+
+<h2 class="section-title">
+Importância da Startup no Mercado
+</h2>
+
+<p class="section-subtitle">
+A startup surge como uma solução inovadora diante da crescente necessidade de transformação digital no setor da construção civil. Em um mercado que exige cada vez mais produtividade, precisão e integração tecnológica, as reuniões imersivas representam uma ferramenta estratégica para empresas que desejam aumentar sua eficiência operacional, melhorar seus resultados e acompanhar as tendências da Indústria 4.0.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Transformação Digital</h3>
+<p>
+A proposta da startup moderniza processos tradicionais da construção civil através de soluções tecnológicas inteligentes e imersivas.
+</p>
+</div>
+
+<div class="card">
+<h3>Eficiência Operacional</h3>
+<p>
+As reuniões imersivas reduzem falhas, retrabalhos e desperdícios, aumentando produtividade e precisão nos projetos.
+</p>
+</div>
+
+<div class="card">
+<h3>Indústria 4.0</h3>
+<p>
+A integração entre engenharia, inovação e visualização 3D posiciona a startup dentro das tendências tecnológicas do mercado atual.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="projeto">
+
+<h2 class="section-title">
+Exemplificação do Projeto
+</h2>
+
+<p class="section-subtitle">
+O projeto da startup consiste na criação de uma plataforma de reuniões imersivas voltada para empresas de engenharia e construção civil, permitindo análises mais eficientes, tecnológicas e interativas.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Visualização 3D</h3>
+<p>
+Os participantes conseguem visualizar ambientes internos e externos do empreendimento em um ambiente virtual totalmente imersivo.
+</p>
+</div>
+
+<div class="card">
+<h3>Correção de Falhas</h3>
+<p>
+Problemas estruturais e incompatibilidades podem ser identificados antes da execução da obra, reduzindo custos e desperdícios.
+</p>
+</div>
+
+<div class="card">
+<h3>Reuniões Inteligentes</h3>
+<p>
+Engenheiros, arquitetos, clientes e gestores conseguem interagir em tempo real durante o planejamento do projeto.
+</p>
+</div>
+
+<div class="card">
+<h3>Aprovação Facilitada</h3>
+<p>
+O cliente pode visualizar o resultado final do empreendimento de forma realista, aumentando confiança e assertividade.
+</p>
+</div>
+
+</div>
+
+<div style="margin-top:70px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:30px; padding:50px; line-height:2; color:#cfcfcf;">
+
+<p>
+Como exemplo prático, imagine uma construtora desenvolvendo um edifício residencial de grande porte. Normalmente, engenheiros, arquitetos, clientes e gestores precisam analisar plantas técnicas, imagens em 2D e documentos separados, o que pode gerar dúvidas, falhas de comunicação e retrabalhos durante a execução da obra.
+</p>
+
+<br>
+
+<p>
+Com a solução desenvolvida pela startup, todas as informações do projeto podem ser apresentadas em um ambiente virtual imersivo, permitindo que os participantes realizem reuniões interativas e visualizem a estrutura da obra em 3D antes mesmo do início da construção.
+</p>
+
+<br>
+
+<p>
+Durante a reunião, os profissionais conseguem identificar possíveis erros estruturais, realizar alterações em tempo real, compartilhar observações técnicas entre equipes e aprovar etapas do projeto com maior precisão.
+</p>
+
+<br>
+
+<p>
+Caso um engenheiro identifique conflito entre a tubulação hidráulica e a estrutura elétrica do edifício, o problema poderá ser corrigido virtualmente antes da execução física da obra, evitando gastos desnecessários, atrasos e desperdícios de materiais.
+</p>
+
+<br>
+
+<p>
+Além disso, o cliente também poderá participar da experiência imersiva, visualizando o resultado final do empreendimento de forma realista, aumentando a confiança, melhorando a comunicação e facilitando o processo de aprovação.
+</p>
+
+</div>
+
+</section>
+
+<section class="section" id="planos">
+
+<h2 class="section-title">
+Planos e Valores
+</h2>
+
+<p class="section-subtitle">
+Modelos de contratação desenvolvidos para atender empresas de diferentes portes e necessidades.
+</p>
+
+<div class="cards">
+
+<div class="card">
+<h3>Plano Básico</h3>
+<p style="font-size:38px; color:#b8b8b8; margin:25px 0; font-weight:700;">
+R$ 14.160
+</p>
+<p>
+Ideal para pequenas empresas que desejam iniciar a transformação digital e utilizar reuniões imersivas em projetos específicos.
+</p>
+</div>
+
+<div class="card">
+<h3>Plano Intermediário</h3>
+<p style="font-size:38px; color:#b8b8b8; margin:25px 0; font-weight:700;">
+R$ 28.000
+</p>
+<p>
+Voltado para empresas em crescimento que necessitam de maior integração tecnológica e suporte contínuo.
+</p>
+</div>
+
+<div class="card">
+<h3>Plano Avançado</h3>
+<p style="font-size:38px; color:#b8b8b8; margin:25px 0; font-weight:700;">
+R$ 50.000
+</p>
+<p>
+Solução completa para grandes construtoras e empresas que desejam máxima performance, inovação e suporte estratégico.
+</p>
+
+</div>
+
+</section>
+
+<section class="section" id="projeto-original">
+
+<h2 class="section-title">Destaques do Projeto</h2>
+<p class="section-subtitle">
+Uma apresentação moderna e visualmente impactante para impressionar na apresentação do TCC.
+</p>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Interface Futurista</h3>
+        <p>
+            Design sofisticado inspirado em grandes empresas de tecnologia.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Totalmente Responsivo</h3>
+        <p>
+            Compatível com computadores, tablets e celulares.
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Performance</h3>
+        <p>
+            Estrutura otimizada para carregamento rápido e experiência fluida.
+        </p>
+    </div>
+
+</div>
+
+</section>
+
+<section class="section contact" id="contato">
+
+<h2>Pronto para inovar?</h2>
+
+<p>
+Entre em contato e descubra como a tecnologia pode transformar o futuro.
+</p>
+
+<a href="#" class="btn">ENTRAR EM CONTATO</a>
+
+</section>
+
+<footer>
+
+<p>© 2026 FutureTech • Projeto desenvolvido para TCC</p>
+
+<div class="socials">
+    <a href="#">IG</a>
+    <a href="#">IN</a>
+    <a href="#">GH</a>
+</div>
+
+</footer>
+
+</body>
+</html>
