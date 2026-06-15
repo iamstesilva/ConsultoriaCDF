@@ -628,6 +628,47 @@ footer{
         white-space:nowrap;
     }
 
+    .hero-buttons{
+        position:relative;
+        z-index:9999;
+    }
+
+    .hero-buttons a{
+        position:relative;
+        z-index:9999;
+        pointer-events:auto;
+    }
+
+    .hero-card,
+    .hero-card::before,
+    .glow-circle{
+        pointer-events:none;
+    }
+
+}
+
+@media(max-width:768px){
+
+    header{
+        padding:12px 5%;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:10px;
+    }
+
+    .logo{
+        font-size:18px;
+        letter-spacing:1px;
+        flex:1;
+    }
+
+    header .btn{
+        padding:8px 12px;
+        font-size:10px;
+        white-space:nowrap;
+    }
+
 }
 </style>
 </head>
@@ -661,16 +702,16 @@ footer{
         inteligência artificial, automação e soluções digitais modernas.
     </p>
 
-    <div class="hero-buttons">
-        <div class="hero-buttons">
+<div class="hero-buttons">
 
-    <a href="https://google.com" class="btn">
-    SIMULAÇÃO
+    <a href="https://canva.link/0kjbywqqb3iapyo"
+       target="_self"
+       class="btn">
+       SIMULAÇÃO
     </a>
 
     <a href="https://vestuarioaxel.my.canva.site/dahmm1hc7u8"
-       target="_blank"
-       rel="noopener noreferrer"
+       target="_self"
        class="btn">
        PROJETO
     </a>
